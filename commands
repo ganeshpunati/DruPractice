@@ -1,0 +1,17 @@
+->  create schema druSchema;
+-> CREATE TABLE druschema.patient
+(
+)
+;
+ALTER TABLE IF EXISTS druschema.patient
+    OWNER to postgres;
+->  create table druschema.patient(patientId int,patientName varchar(225));
+->  alter table druschema.patient rename to druPatient;
+->  alter table druschema.drupatient add  dob date;
+->  alter table druschema.drupatient add  gender char,add salary int;
+-> drop table druschema.drupatient;
+-> truncate table public.patient;
+-> alter table druschema.drupatient rename column gender to sex;
+-> alter table druschema.drupatient drop column sex;
+-> INSERT INTO druschema.drupatient(patientid, patientname, dob, salary, gender) VALUES (101,'Ganesh','3-25-1998',15000,'M');
+-> UPDATE druschema.drupatient SET salary=18000 WHERE salary = 15000;
