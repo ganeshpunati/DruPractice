@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Java Inspires </title>
+</head>
+<body>
+<h1>Welcome to Java </h1>
+<h4>spring boot is avilable</h4>
+<hr>
+<form th:action="@{/addProduct}" th:object="${product}" method="POST">
+   <p> ProductId:<input type="text" name="productId"/></p>
+   <p> ProductName:<input type="text" name="productName"/></p>
+   <p> price:<input type="number" name="price"/></p>
+   <p> <input type="submit" value="Add Products"/></p>
+</form>
+</body>
+</html>

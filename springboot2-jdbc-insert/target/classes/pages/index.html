@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Java Inspires </title>
+</head>
+<body>
+<h1>Welcome to Java </h1>
+<h4>spring boot is avilable</h4>
+<hr>
+<form th:action="@{/addUser}" th:object="${user}" method="POST">
+   <p> UserName:<input type="text" name="userName"/></p>
+   <p> Email:<input type="email" name="email"/></p>
+   <p> PassWord:<input type="password" name="password"/></p>
+   <p> <input type="submit" value="Add User"/></p>
+</form>
+</body>
+</html>
