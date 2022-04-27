@@ -2,22 +2,23 @@ package springboot.crudjdbcnamedparameters.entity;
 
 import java.util.List;
 
-public class InsertEmployeeRequest {
-
+public class FetchEmployeeDeatilsDto {
 	private Long empId;
+	private String empNm;
 	private String firstNm;
 	private String middleNm;
 	private String lastNm;
 	private String emailId;
+	private Long mobileNo;
 	private Double empSalary;
 	private Integer empAge;
-	private Long mobileNo;
 	private String countryNm;
 	private String stateNm;
 	private String cityNm;
 	private Integer pincode;
 	private String address;
-
+	private Long deptId;
+	
 	private List<EmployeeDeptBean> departmentList;
 
 	private List<EmployeeDesignationBean> designationList;
@@ -28,6 +29,14 @@ public class InsertEmployeeRequest {
 
 	public void setEmpId(Long empId) {
 		this.empId = empId;
+	}
+
+	public String getEmpNm() {
+		return empNm;
+	}
+
+	public void setEmpNm(String empNm) {
+		this.empNm = empNm;
 	}
 
 	public String getFirstNm() {
@@ -54,8 +63,6 @@ public class InsertEmployeeRequest {
 		this.lastNm = lastNm;
 	}
 
-	
-
 	public String getEmailId() {
 		return emailId;
 	}
@@ -64,11 +71,19 @@ public class InsertEmployeeRequest {
 		this.emailId = emailId;
 	}
 
-	public double getEmpSalary() {
+	public Long getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(Long mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public Double getEmpSalary() {
 		return empSalary;
 	}
 
-	public void setEmpSalary(double empSalary) {
+	public void setEmpSalary(Double empSalary) {
 		this.empSalary = empSalary;
 	}
 
@@ -78,14 +93,6 @@ public class InsertEmployeeRequest {
 
 	public void setEmpAge(Integer empAge) {
 		this.empAge = empAge;
-	}
-
-	public Long getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(Long mobileNo) {
-		this.mobileNo = mobileNo;
 	}
 
 	public String getCountryNm() {
@@ -126,6 +133,14 @@ public class InsertEmployeeRequest {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Long getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
 	}
 
 	public List<EmployeeDeptBean> getDepartmentList() {
