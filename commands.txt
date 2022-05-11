@@ -1,0 +1,92 @@
+CREATE TABLE  productdb.employee_records_list
+(
+    emp_id bigint PRIMARY KEY,
+    emp_nm character varying ,
+    emp_email character varying,
+    mobile_no integer
+);
+
+drop  table productdb.employee_records_list;
+
+INSERT INTO productdb.employee_records_list(emp_id, emp_nm, emp_email, mobile_no)
+VALUES (101,'ganesh','g@mail.com',93457),(102,'Rakesh','r@mail.com',93589),
+(104,'suresh','s@mail.com',344689),(105,'ankit','a@mail.com',14689);
+
+select * from productdb.employee_records_list;
+
+select emp_id,emp_nm,emp_email,mobile_no from productdb.employee_records_list ;
+
+-- //subqueries performed
+select * from  productdb.employee_records_list where emp_id>(select max(emp_id) from productdb.employee_records_list where emp_nm='ganesh');
+
+ --//alter query 
+alter table productdb.employee_records_list rename column emp_nm to emp_nms;
+
+-- //queries for filter
+select * from productdb.employee_records_list where  emp_nm  like 'ganesh';
+SELECT * FROM productdb.employee_records_list WHERE emp_id BETWEEN 100 AND 103;
+
+-- //inner joint
+select emp_designation_id, emp_dept_id , dept_id
+from productdb.employee_designation_ref
+inner join productdb.employee_department_ref
+on employee_designation_ref.emp_id = employee_department_ref.emp_id;
+
+-- //left joint
+select emp_dept_id,emp_designation_id ,dept_id
+from productdb.employee_designation_ref
+left join productdb.employee_department_ref
+on employee_designation_ref.emp_id = employee_department_ref.emp_id;
+
+--//right joint
+select emp_designation_id ,emp_dept_id
+from productdb.employee_designation_ref
+right join productdb.employee_department_ref
+on employee_designation_ref.emp_id = employee_department_ref.emp_id;
+
+
+-- //Queries for concat
+SELECT emp_dept_id,emp_id,dept_id,
+concat(emp_id,' ',dept_id) "emp_id and dept_id " 
+FROM productdb.employee_department_ref
+WHERE dept_id=101;
+
+--// use rank
+SELECT emp_id,emp_email, emp_nm,mobile_no, RANK () OVER ( ORDER BY mobile_no DESC) mobile_no_rank 
+FROM productdb.employee_records_list;
+
+--//Using Function
+
+CREATE OR REPLACE FUNCTION totalRecords ()
+RETURNS integer AS $total$
+declare
+	total integer;
+BEGIN
+   SELECT count(*) into total FROM productdb.employee_records_list;
+   RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
+--// Excute call to function
+select totalRecords();
+
+--// View
+CREATE VIEW employee_view AS SELECT emp_id, emp_nm, mobile_no
+FROM  productdb.employee_records_list;
+
+select * from employee_view;
+
+--// FETCH
+SELECT emp_id, emp_nm, mobile_no FROM productdb.employee_records_list
+ORDER BY emp_nm  FETCH FIRST ROW ONLY;
+	
+--//ARRAYAGG
+SELECT
+dept_id,
+ARRAY_AGG (emp_nm || ' ' || emp_email) employess
+FROM
+productdb.employee_department_ref
+INNER JOIN productdb.employee_info_ref USING (emp_id)
+GROUP BY
+dept_id
+ORDER BY
+dept_id;
